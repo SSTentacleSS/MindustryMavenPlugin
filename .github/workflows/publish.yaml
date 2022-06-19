@@ -23,6 +23,10 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
+    - name: Install gpg secret key
+      run: |
+        cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+        gpg --list-secret-keys --keyid-format LONG
     - name: Deploy to Sonatype Package Registry
       env:
         SONATYPE_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
@@ -31,4 +35,4 @@ jobs:
       run: |
         mkdir -p ~/.m2
         echo "<servers><server><id>sonatype-nexus-snapshots</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server><server><id>sonatype-nexus-staging</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server></servers>" > ~/.m2/settings.xml
-        mvn deploy -Dgpg.passphrase="${GPG_PASSWORD}"
+        mvn clean deploy -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
