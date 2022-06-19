@@ -6,7 +6,7 @@
   <artifactId>mindustry-debug-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
 
-  <name>Maven Mindustry Debug Plugin</name>
+  <name>Mindustry Debug Maven Plugin</name>
   <version>1.0.1</version>
 
   <properties>
