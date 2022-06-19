@@ -35,3 +35,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: target/*.jar
           tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
