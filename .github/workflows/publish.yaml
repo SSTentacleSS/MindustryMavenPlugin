@@ -29,5 +29,5 @@ jobs:
         SONATYPE_USERNAME: ${{ secrets.PUBLISH_USERNAME }}
       run: |
         mkdir -p ~/.m2
-        echo "<servers><server><id>sonatype-nexus-snapshots</id><username>${SONATYPE_USERNAME}</username><password>${SONATYPE_TOKEN}</password></server><server><id>sonatype-nexus-staging</id><username>${SONATYPE_USERNAME}</username><password>${SONATYPE_TOKEN}</password></server></servers>" > ~/.m2/settings.xml
+        echo "<servers><server><id>sonatype-nexus-snapshots</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server><server><id>sonatype-nexus-staging</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server></servers>" > ~/.m2/settings.xml
         mvn deploy
