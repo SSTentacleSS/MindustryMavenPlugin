@@ -11,6 +11,25 @@
   <version>1.1.0</version>
   <url>https://github.com/SSTentacleSS/MavenMindustryDebugPlugin</url>
 
+  <licenses>
+    <license>
+     <name>The Unlicense</name>
+     <url>https://raw.githubusercontent.com/SSTentacleSS/MavenMindustryDebugPlugin/main/LICENSE</url>
+    </license>
+   </licenses>
+
+   <developers>
+    <developer>
+     <name>SSTentacleSS</name>
+    </developer>
+   </developers>
+
+   <scm>
+    <connection>scm:git:git://github.com/SSTentacleSS/MavenMindustryDebugPlugin.git</connection>
+    <developerConnection>scm:git:ssh://github.com:SSTentacleSS/MavenMindustryDebugPlugin.git</developerConnection>
+    <url>https://github.com/SSTentacleSS/MavenMindustryDebugPlugin/tree/main</url>
+   </scm>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>16</maven.compiler.source>
