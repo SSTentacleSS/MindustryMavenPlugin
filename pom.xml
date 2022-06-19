@@ -8,7 +8,7 @@
 
   <name>Mindustry Debug Maven Plugin</name>
   <description>Maven plugin for debugging Mindustry</description>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <url>https://github.com/SSTentacleSS/MavenMindustryDebugPlugin</url>
 
   <licenses>
