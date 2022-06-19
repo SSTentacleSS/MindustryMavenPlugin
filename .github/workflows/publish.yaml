@@ -1,16 +1,28 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v2
     - name: Setup Java
       uses: actions/setup-java@v2
       with:
         distribution: 'zulu'
         java-version: 16
+    - name: Caching Dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
     - name: Deploy to Github Package Registry
       env:
         GITHUB_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
