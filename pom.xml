@@ -3,18 +3,18 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>io.github.SSTentacleSS.mindustry</groupId>
-  <artifactId>mindustry-debug-maven-plugin</artifactId>
+  <artifactId>mindustry-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
 
   <name>Mindustry Debug Maven Plugin</name>
-  <description>Maven plugin for debugging Mindustry</description>
-  <version>1.1.1</version>
-  <url>https://github.com/SSTentacleSS/MavenMindustryDebugPlugin</url>
+  <description>Maven plugin for developing Mindustry</description>
+  <version>1.1.2</version>
+  <url>https://github.com/SSTentacleSS/MindustryMavenPlugin</url>
 
   <licenses>
     <license>
      <name>The Unlicense</name>
-     <url>https://raw.githubusercontent.com/SSTentacleSS/MavenMindustryDebugPlugin/main/LICENSE</url>
+     <url>https://raw.githubusercontent.com/SSTentacleSS/MindustryMavenPlugin/main/LICENSE</url>
     </license>
    </licenses>
 
@@ -25,9 +25,9 @@
    </developers>
 
    <scm>
-    <connection>scm:git:git://github.com/SSTentacleSS/MavenMindustryDebugPlugin.git</connection>
-    <developerConnection>scm:git:ssh://github.com:SSTentacleSS/MavenMindustryDebugPlugin.git</developerConnection>
-    <url>https://github.com/SSTentacleSS/MavenMindustryDebugPlugin/tree/main</url>
+    <connection>scm:git:git://github.com/SSTentacleSS/MindustryMavenPlugin.git</connection>
+    <developerConnection>scm:git:ssh://github.com:SSTentacleSS/MindustryMavenPlugin.git</developerConnection>
+    <url>https://github.com/SSTentacleSS/MindustryMavenPlugin/tree/main</url>
    </scm>
 
   <properties>
