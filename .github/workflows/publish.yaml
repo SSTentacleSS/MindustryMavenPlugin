@@ -34,5 +34,5 @@ jobs:
         GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
       run: |
         mkdir -p ~/.m2
-        echo "<servers><server><id>sonatype-nexus-snapshots</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server><server><id>sonatype-nexus-staging</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server></servers>" > ~/.m2/settings.xml
+        echo "<settings><servers><server><id>ossrh</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server></servers></settings>" > ~/.m2/settings.xml
         mvn clean deploy -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
