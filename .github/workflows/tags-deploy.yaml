@@ -33,5 +33,5 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/mindustry-debug-maven-plugin*.jar
+          file: target/*.jar
           tag: ${{ github.ref }}
