@@ -78,29 +78,14 @@
           </altDeploymentRepository>
         </configuration>
       </plugin>
-
-      <plugin>
-        <groupId>com.github.github</groupId>
-        <artifactId>site-maven-plugin</artifactId>
-        <version>0.9</version>
-        <configuration>
-          <message>Maven artifacts for ${project.version}</message>
-          <noJekyll>true</noJekyll>
-          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
-          <branch>refs/heads/mvn-repo</branch>
-          <includes><include>**/*</include></includes>
-          <repositoryName>NewLibrary</repositoryName>
-          <repositoryOwner>alexbarchuk</repositoryOwner>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>site</goal>
-            </goals>
-            <phase>deploy</phase>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub SSTentacleSS Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/SSTentacleSS/MavenMindustryDebugPlugin</url>
+    </repository>
+  </distributionManagement>
 </project>
