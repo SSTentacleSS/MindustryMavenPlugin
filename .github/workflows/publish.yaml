@@ -1,0 +1,23 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 16
+    - name: Deploy to Github Package Registry
+      env:
+        GITHUB_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+      run: |
+        mkdir ~/.m2
+        echo "<settings><servers><server><id>github</id><username>SSTentacleSS</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+        mvn deploy
