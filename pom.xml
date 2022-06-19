@@ -7,6 +7,7 @@
   <packaging>maven-plugin</packaging>
 
   <name>Mindustry Debug Maven Plugin</name>
+  <description>Maven plugin for debugging Mindustry</description>
   <version>1.0.9</version>
 
   <properties>
