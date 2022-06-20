@@ -16,13 +16,10 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: 16
-    - name: Cache local Maven repository
-      uses: actions/cache@v2
+    - name: Restore Maven cache
+      uses: skjolber/maven-cache-github-action@v1
       with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+        step: restore
     - name: Install gpg secret key
       run: |
         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
@@ -35,4 +32,8 @@ jobs:
       run: |
         mkdir -p ~/.m2
         echo "<settings><servers><server><id>ossrh</id><username><![CDATA[${SONATYPE_USERNAME}]]></username><password><![CDATA[${SONATYPE_TOKEN}]]></password></server></servers></settings>" > ~/.m2/settings.xml
-        mvn clean deploy -P release -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+        mvn clean deploy -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+    - name: Save Maven cache
+      uses: skjolber/maven-cache-github-action@v1
+      with:
+        step: save
