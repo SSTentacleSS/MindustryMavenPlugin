@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -70,21 +71,31 @@ public class DebugMojo extends AbstractMojo {
 
         debugMessage("Debug directory set to \"" + debugPath.getAbsolutePath() + "\"");
 
+        List<String> command = List.of(
+            "java",
+            "-jar",
+            "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (suspend ? 'y' : 'n') + ",address=" + debugPort,
+            distFile.getAbsolutePath()
+        );
+
+        command.addAll(List.of(args));
+
         ProcessBuilder server = new ProcessBuilder()
             .inheritIO()
-            .command(
-                "java",
-                "-jar",
-                "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (suspend ? 'y' : 'n') + ",address=" + debugPort,
-                distFile.getAbsolutePath()
-            ).directory(debugPath);
+            .command(command)
+            .directory(debugPath);
+        File modsDirectory = Path.of(debugPath.getAbsolutePath(), "config/mods").toFile();
+
+        debugMessage("Deleting \"" + modsDirectory.getAbsolutePath() + "\"");
+        modsDirectory.delete();
+        debugMessage("Deleted \"" + modsDirectory.getAbsolutePath() + "\"");
 
         debugMessage("Copying \"" + pluginJar + "\" to debug directory");
 
         try {
             FileUtils.copyFileToDirectory(
                 Path.of(pluginJar).toFile(),
-                Path.of(debugPath.getAbsolutePath(), "config/mods").toFile(),
+                modsDirectory,
                 false
             );
         } catch (IOException e) {
