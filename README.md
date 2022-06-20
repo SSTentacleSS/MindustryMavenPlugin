@@ -1,10 +1,31 @@
 # **MindustryDebugPlugin**
 
-Maven plugin for debugging Mindustry
+Maven plugin for Mindustry
 
 # Installing
 
 add this to `pom.xml` file
 ```xml
-Soon!
+<build>
+    <plugins>
+        <plugin>
+            <groupId>io.github.SSTentacleSS.mindustry</groupId>
+            <artifactId>mindustry-maven-plugin</artifactId>
+            <version>1.1.3</version>
+            <configuration>
+                <mindustryVersion>${mindustryVersion}</mindustryVersion> <!-- Required, debug mindustry version -->
+                <pluginJar>target/finalName.jar</pluginJar> <!-- Required, path to debug plugin jar -->
+
+                <suspend>false</suspend> <!-- Will the debugger wait for your connection? default false -->
+                <debugPort>8000</debugPort> <!-- Debug port, default 8000 -->
+
+                <args> <!-- Args for mindustry server -->
+                <arg>args1</arg>
+                <arg>args2</arg>
+                <arg>args3</arg>
+                </args>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
