@@ -14,15 +14,17 @@ add this to `pom.xml` file
             <version>1.1.3</version>
             <configuration>
                 <mindustryVersion>${mindustryVersion}</mindustryVersion> <!-- Required, debug mindustry version -->
-                <pluginJar>target/finalName.jar</pluginJar> <!-- Required, path to debug plugin jar -->
+                <pluginJars>
+                    <jar>target/${finalName}.jar</jar>
+                </pluginJars> <!-- Required, path to debug plugin jar -->
 
                 <suspend>false</suspend> <!-- Will the debugger wait for your connection? default false -->
                 <debugPort>8000</debugPort> <!-- Debug port, default 8000 -->
 
                 <args> <!-- Args for mindustry server -->
-                <arg>args1</arg>
-                <arg>args2</arg>
-                <arg>args3</arg>
+                    <arg>args1</arg>
+                    <arg>args2</arg>
+                    <arg>args3</arg>
                 </args>
             </configuration>
         </plugin>
