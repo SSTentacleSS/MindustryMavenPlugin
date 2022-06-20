@@ -24,15 +24,15 @@ public class DebugMojo extends AbstractMojo {
 
     @Parameter(property = "mindustryVersion", required = true)
     private String mindustryVersion;
-
-    @Parameter(property = "pluginJar", required = true)
-    private String pluginJar;
-
+    
     @Parameter(property = "suspend", defaultValue = "false")
     private boolean suspend;
-
+    
     @Parameter(property = "debugPort", defaultValue = "8000")
     private int debugPort;
+    
+    @Parameter(property = "pluginJars", required = true, defaultValue = "")
+    private String[] pluginJars;
 
     @Parameter(property = "args", defaultValue = "")
     private String[] args;
@@ -90,19 +90,21 @@ public class DebugMojo extends AbstractMojo {
         modsDirectory.delete();
         debugMessage("Deleted \"" + modsDirectory.getAbsolutePath() + "\"");
 
-        debugMessage("Copying \"" + pluginJar + "\" to debug directory");
+        for (String pluginJar : pluginJars) {
+            debugMessage("Copying \"" + pluginJar + "\" to debug directory");
+            
+            try {
+                FileUtils.copyFileToDirectory(
+                    Path.of(pluginJar).toFile(),
+                    modsDirectory,
+                    false
+                );
+            } catch (IOException e) {
+                throw new MojoExecutionException(e.getMessage(), e);
+            }
 
-        try {
-            FileUtils.copyFileToDirectory(
-                Path.of(pluginJar).toFile(),
-                modsDirectory,
-                false
-            );
-        } catch (IOException e) {
-            throw new MojoExecutionException(e.getMessage(), e);
+            debugMessage("Copied \"" + pluginJar + "\" to debug directory");
         }
-
-        debugMessage("Copied \"" + pluginJar + "\" to debug directory");
 
         try {
             logMessage("Executing " + server.command().toString());
