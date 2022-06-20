@@ -1,4 +1,4 @@
-package tentacle.mindustry;
+package io.github.SSTentacleSS.mindustry;
 
 import java.io.File;
 import java.io.IOException;

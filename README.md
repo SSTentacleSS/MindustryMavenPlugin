@@ -11,7 +11,7 @@ add this to `pom.xml` file
         <plugin>
             <groupId>io.github.SSTentacleSS.mindustry</groupId>
             <artifactId>mindustry-maven-plugin</artifactId>
-            <version>1.1.3</version>
+            <version>1.1.7</version>
             <configuration>
                 <mindustryVersion>${mindustryVersion}</mindustryVersion> <!-- Required, debug mindustry version -->
                 <pluginJars>
