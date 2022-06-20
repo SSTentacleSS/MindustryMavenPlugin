@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -71,14 +73,14 @@ public class DebugMojo extends AbstractMojo {
 
         debugMessage("Debug directory set to \"" + debugPath.getAbsolutePath() + "\"");
 
-        List<String> command = List.of(
+        List<String> command = new ArrayList<>(List.of(
             "java",
             "-jar",
             "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (suspend ? 'y' : 'n') + ",address=" + debugPort,
             distFile.getAbsolutePath()
-        );
+        ));
 
-        command.addAll(List.of(args));
+        command.addAll(Arrays.asList(args));
 
         ProcessBuilder server = new ProcessBuilder()
             .inheritIO()
