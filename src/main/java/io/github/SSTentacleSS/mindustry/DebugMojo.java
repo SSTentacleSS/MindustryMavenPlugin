@@ -33,7 +33,7 @@ public class DebugMojo extends AbstractMojo {
     @Parameter(property = "debugPort", defaultValue = "8000")
     private int debugPort;
     
-    @Parameter(property = "pluginJars", required = true, defaultValue = "")
+    @Parameter(property = "pluginJars", required = true)
     private String[] pluginJars;
 
     @Parameter(property = "args", defaultValue = "")
@@ -89,7 +89,7 @@ public class DebugMojo extends AbstractMojo {
         File modsDirectory = Path.of(debugPath.getAbsolutePath(), "config/mods").toFile();
 
         debugMessage("Deleting \"" + modsDirectory.getAbsolutePath() + "\"");
-        modsDirectory.delete();
+        deleteDirectory(modsDirectory);
         debugMessage("Deleted \"" + modsDirectory.getAbsolutePath() + "\"");
 
         for (String pluginJar : pluginJars) {
@@ -117,6 +117,18 @@ public class DebugMojo extends AbstractMojo {
         } catch (IOException | InterruptedException e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
+    }
+
+    private boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+
+        return directoryToBeDeleted.delete();
     }
 
     private void debugMessage(String message) {
