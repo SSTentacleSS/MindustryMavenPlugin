@@ -29,3 +29,7 @@ add this to `pom.xml` file
     </plugins>
 </build>
 ```
+
+# Debugging
+
+run `mvn mindustry:debug`
