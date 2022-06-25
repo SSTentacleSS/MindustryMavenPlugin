@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -34,7 +36,7 @@ public class DebugMojo extends AbstractMojo {
     @Parameter(property = "debugPort", defaultValue = "8000")
     private int debugPort;
     
-    @Parameter(property = "pluginJars", required = true, defaultValue = "")
+    @Parameter(property = "pluginJars", required = true)
     private String[] pluginJars;
 
     @Parameter(property = "args", defaultValue = "")
@@ -74,14 +76,14 @@ public class DebugMojo extends AbstractMojo {
 
         debugMessage("Debug directory set to \"" + debugPath.getAbsolutePath() + "\"");
 
-        List<String> command = List.of(
+        List<String> command = new ArrayList<>(List.of(
             "java",
             "-jar",
             "-agentlib:jdwp=transport=dt_socket,server=y,suspend=" + (suspend ? 'y' : 'n') + ",address=" + debugPort,
             distFile.getAbsolutePath()
-        );
+        ));
 
-        command.addAll(List.of(args));
+        command.addAll(Arrays.asList(args));
 
         ProcessBuilder server = new ProcessBuilder()
             .inheritIO()
@@ -90,7 +92,7 @@ public class DebugMojo extends AbstractMojo {
         File modsDirectory = Path.of(debugPath.getAbsolutePath(), "config/mods").toFile();
 
         debugMessage("Deleting \"" + modsDirectory.getAbsolutePath() + "\"");
-        modsDirectory.delete();
+        deleteDirectory(modsDirectory);
         debugMessage("Deleted \"" + modsDirectory.getAbsolutePath() + "\"");
 
         for (String pluginJar : pluginJars) {
@@ -118,6 +120,18 @@ public class DebugMojo extends AbstractMojo {
         } catch (IOException | InterruptedException e) {
             throw new MojoExecutionException(e.getMessage(), e);
         }
+    }
+
+    private boolean deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+
+        return directoryToBeDeleted.delete();
     }
 
     private void debugMessage(String message) {
