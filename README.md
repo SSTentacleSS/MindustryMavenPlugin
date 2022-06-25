@@ -11,7 +11,7 @@ add this to `pom.xml` file
         <plugin>
             <groupId>io.github.SSTentacleSS.mindustry</groupId>
             <artifactId>mindustry-maven-plugin</artifactId>
-            <version>1.1.9</version>
+            <version>1.2.0</version>
             <configuration>
                 <mindustryVersion>${mindustryVersion}</mindustryVersion> <!-- Required, debug mindustry version -->
                 <pluginJars>
@@ -20,6 +20,7 @@ add this to `pom.xml` file
 
                 <suspend>false</suspend> <!-- Will the debugger wait for your connection? default false -->
                 <debugPort>8000</debugPort> <!-- Debug port, default 8000 -->
+                <force>false</force> <!-- Force the plugin to download the server assembly again, default false -->
 
                 <args> <!-- Args for mindustry server -->
                     <arg>args1</arg>

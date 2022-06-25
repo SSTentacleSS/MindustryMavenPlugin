@@ -29,6 +29,9 @@ public class DebugMojo extends AbstractMojo {
     
     @Parameter(property = "suspend", defaultValue = "false")
     private boolean suspend;
+
+    @Parameter(property = "force", defaultValue = "false")
+    private boolean force;
     
     @Parameter(property = "debugPort", defaultValue = "8000")
     private int debugPort;
@@ -49,7 +52,7 @@ public class DebugMojo extends AbstractMojo {
 
         debugMessage("Set server path to " + distFile.toString());
 
-        if (!distFile.exists()) {
+        if (!distFile.exists() && !force) {
             try {
                 URL sourceUrl = new URL("https://github.com/Anuken/Mindustry/releases/download/" + mindustryVersion + "/server-release.jar");
 
