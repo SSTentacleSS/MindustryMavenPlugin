@@ -41,7 +41,7 @@ add this to `pom.xml` file
 
 * Visual Studio Code
     1. run `mvn mindustry:generate-config -Deditor=vscode`
-    2. `mvn wrapper:wrapper` <!-- Or change all ./mvnw to mvn in .vscode/tasks -->
+    2. run `mvn wrapper:wrapper` <!-- Or change all ./mvnw to mvn in .vscode/tasks -->
     2. Use `Run and Debug` -> `Build and Debug`
 
 # Debugging
