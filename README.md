@@ -2,6 +2,10 @@
 
 Maven plugin for Mindustry
 
+# RoadMap
+
+- [ ] Add debug template for editors (in development)
+
 # Installing
 
 add this to `pom.xml` file
