@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Build and Debug",
+            "preLaunchTask": "🧰 Debug",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 8000
+        }
+    ]
+}
