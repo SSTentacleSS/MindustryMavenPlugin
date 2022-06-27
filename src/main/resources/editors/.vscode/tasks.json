@@ -9,7 +9,7 @@
                 "command": ".\\mvnw.cmd"
             },
             "args": [
-                "wrapper:wrapper", "clean", "package"
+                "clean", "package"
             ],
             "group": "build"
         },
