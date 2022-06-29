@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.jar.JarFile;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
@@ -56,7 +57,9 @@ public class DebugMojo extends AbstractMojo {
 
                 FileUtils.copyURLToFile(
                     sourceUrl,
-                    distFile
+                    distFile,
+                    10000,
+                    10000
                 );
 
                 logMessage("Download completed successfully");
@@ -64,6 +67,8 @@ public class DebugMojo extends AbstractMojo {
                 throw new MojoExecutionException(e.getMessage(), e);
             }
         }
+
+        checkServerJar(distFile);
 
         File debugPath = Path.of(tmpdir, "servers/" + fileName + "-debug").toFile();
 
@@ -115,6 +120,24 @@ public class DebugMojo extends AbstractMojo {
             logMessage("Server exited with code " + childProcess.waitFor());
         } catch (IOException | InterruptedException e) {
             throw new MojoExecutionException(e.getMessage(), e);
+        }
+    }
+
+    private boolean checkServerJar(File jarFile) throws MojoExecutionException {
+        debugMessage("Integrity check started!");
+
+        try (JarFile serverJar = new JarFile(jarFile)) {
+            String serverMainClass = serverJar.getManifest()
+                .getMainAttributes()
+                .getValue("Main-Class");
+
+            if (serverJar.getEntry(serverMainClass) == null)
+                throw new Error();
+
+            debugMessage("Integrity check finished successfully!");
+            return true;
+        } catch (Throwable e) {
+            throw new MojoExecutionException("Downloaded Jar corrupted! Try again later (Or check your internet connection?)");
         }
     }
 
