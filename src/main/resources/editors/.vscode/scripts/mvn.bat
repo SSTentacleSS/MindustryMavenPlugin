@@ -5,5 +5,6 @@ mvn -version >nul 2>&1 && (
         .\\mvnw %*
     ) || (
         echo Maven is not installed locally or globally!
+        exit 127
     )
 )
