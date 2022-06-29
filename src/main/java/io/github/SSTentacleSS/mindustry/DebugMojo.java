@@ -131,13 +131,14 @@ public class DebugMojo extends AbstractMojo {
                 .getMainAttributes()
                 .getValue("Main-Class");
 
-            if (serverJar.getEntry(serverMainClass) == null)
+            if (serverJar.getEntry(serverMainClass.replace('.', '/') + ".class") == null)
                 throw new Error();
 
             debugMessage("Integrity check finished successfully!");
             return true;
         } catch (Throwable e) {
-            throw new MojoExecutionException("Downloaded Jar corrupted! Try again later (Or check your internet connection?)");
+            jarFile.delete();
+            throw new MojoExecutionException("Downloaded Jar corrupted! Try again later (Downloaded jar deleted)");
         }
     }
 
