@@ -6,6 +6,12 @@ Maven plugin for Mindustry
 
 - [x] Add debug template for editors (Ready for Visual Studio Code)
 
+# Conditionality
+
+* Instead of `mvn` can be used 
+    + Windows: `.\\mvnw.cmd`, `.\\mvnw`
+    + U*ix: `./mvnw.sh`
+
 # Installing
 
 add this to `pom.xml` file
@@ -15,7 +21,7 @@ add this to `pom.xml` file
         <plugin>
             <groupId>io.github.SSTentacleSS.mindustry</groupId>
             <artifactId>mindustry-maven-plugin</artifactId>
-            <version>1.2.1a</version>
+            <version>1.3</version>
             <configuration>
                 <mindustryVersion>${mindustryVersion}</mindustryVersion> <!-- Required, debug mindustry version -->
                 <pluginJars>
@@ -41,8 +47,8 @@ add this to `pom.xml` file
 
 * Visual Studio Code
     1. run `mvn mindustry:generate-config -Deditor=vscode`
-    2. run `mvn wrapper:wrapper` Or change all ./mvnw to mvn in .vscode/tasks.json
-    2. Use `Run and Debug` -> `Build and Debug`
+    2. Use `Run and Debug` -> `♿ Build and Debug`
+* **Support for other code editors is planned, I will be glad for any help on this matter**
 
 # Debugging
 

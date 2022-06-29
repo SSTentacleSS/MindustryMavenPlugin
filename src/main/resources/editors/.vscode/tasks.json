@@ -7,6 +7,12 @@
             "args": [
                 ".vscode/scripts/mvn.sh", "clean package"
             ],
+            "windows": {
+                "command": ".vscode/scripts/mvn.bat",
+                "args": [
+                    "clean", "package"
+                ]
+            },
             "presentation": {
                 "showReuseMessage": false
             },
@@ -19,6 +25,12 @@
             "args": [
                 ".vscode/scripts/mvn.sh", "mindustry:debug -DdebugPort=8000"
             ],
+            "windows": {
+                "command": ".vscode/scripts/mvn.bat",
+                "args": [
+                    "mindustry:debug", "-DdebugPort=8000"
+                ]
+            },
             "isBackground": true,
             "presentation": {
                 "showReuseMessage": false,
