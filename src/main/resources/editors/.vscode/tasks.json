@@ -3,26 +3,18 @@
     "tasks": [
         {
             "label": "🧰 Build",
-            "type": "shell",
-            "command": "./mvnw",
-            "windows": {
-                "command": ".\\mvnw.cmd"
-            },
+            "command": "bash",
             "args": [
-                "clean", "package"
+                ".vscode/scripts/mvn.sh", "clean package"
             ],
             "group": "build"
         },
         {
             "label": "🧰 Debug",
             "dependsOn": "🧰 Build",
-            "type": "shell",
-            "command": "./mvnw",
-            "windows": {
-                "command": ".\\mvnw.cmd"
-            },
+            "command": "bash",
             "args": [
-                "mindustry:debug", "-DdebugPort=8000"
+                ".vscode/scripts/mvn.sh", "mindustry:debug -DdebugPort=8000"
             ],
             "isBackground": true,
             "presentation": {

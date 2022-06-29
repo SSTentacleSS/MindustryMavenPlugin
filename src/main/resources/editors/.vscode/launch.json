@@ -3,11 +3,12 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Build and Debug",
+            "name": "♿ Build and Debug",
             "preLaunchTask": "🧰 Debug",
+            "internalConsoleOptions": "neverOpen",
             "request": "attach",
             "hostName": "localhost",
-            "port": 8000
+            "port": 8000,
         }
     ]
 }
